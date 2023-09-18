@@ -15,17 +15,28 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
+  max-width: 1920px;
+  margin: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.add-btn {
+  border-radius: 5px;
+  border-style: none;
+  background-color: aquamarine;
 }
 
 .App-link {
   color: #61dafb;
+}
+.title-add {
+  display: flex;
+  justify-content: space-between;
 }
 
 @keyframes App-logo-spin {
