@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import "./List.css";
 
 function List() {
@@ -9,12 +9,10 @@ function List() {
   ]);
 
   const [newTask, setNewTask] = useState("");
-  const [status, setStatus] = useState(false);
 
   function getKey() {
     return list[list.length - 1].id + 1;
   }
-  function getInput() {}
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,9 +26,18 @@ function List() {
         },
       ]);
     }
-
-    console.log(list);
     setNewTask("");
+  }
+
+  function handleDelete(val) {
+    const result = list.filter((item) => {
+      return item.id !== val;
+    });
+    if (list.length <= 1) {
+      setList([{ id: 0, task: "Add some tasks!", completed: false }]);
+    } else {
+      setList(result);
+    }
   }
   function handleComplete(val) {
     var temp = list;
@@ -57,6 +64,13 @@ function List() {
               handleComplete(item);
             }}
           />
+          <button
+            onClick={() => {
+              handleDelete(item.id);
+            }}
+          >
+            Delete
+          </button>
         </li>
       </>
     );
