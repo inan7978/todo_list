@@ -1,0 +1,13 @@
+.completed {
+  text-decoration: line-through;
+}
+
+.tasks-block {
+  max-width: 80vw;
+  margin: auto;
+}
+.task-block-contents {
+  display: flex;
+  max-width: 400px;
+  background-color: beige;
+}
