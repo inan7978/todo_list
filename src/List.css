@@ -27,6 +27,8 @@
 }
 .new-task-field {
   padding: 35px;
+  display: flex;
+  justify-content: center;
 }
 
 .new-task-text {
@@ -34,8 +36,9 @@
   height: 50px;
   width: 500px;
   font-size: 25px;
-  padding-right: 15px;
 }
 
 .new-task-button {
+  height: 50px;
+  width: 50px;
 }
