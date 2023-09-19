@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  list-style-type: none;
 }
 .completed {
   text-decoration: line-through;
@@ -30,9 +31,9 @@
 
 .new-task-text {
   border-radius: 5px;
-  height: 75px;
-  width: 400px;
-  size: 25px;
+  height: 50px;
+  width: 500px;
+  font-size: 25px;
   padding-right: 15px;
 }
 

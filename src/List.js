@@ -31,12 +31,12 @@ function List() {
 
   function handleDelete(val) {
     const result = list.filter((item) => {
-      return item.id !== val;
+      return item.id !== val.id;
     });
     if (list.length <= 1) {
       setList([{ id: 0, task: "Add some tasks!", completed: false }]);
     } else {
-      setList(result);
+      setList([...result]);
     }
   }
   function handleComplete(val) {
@@ -52,32 +52,29 @@ function List() {
     // use the spread operator as it creates a new array, even though the value are the same as the "old" one
   }
 
+  // useEffect(() => {}, [list]);
+
   const mappedItems = list.map((item) => {
     return (
-      <>
-        <div className="task-container">
-          <input
-            type="checkbox"
-            defaultChecked={item.completed}
-            onChange={(e) => {
-              handleComplete(item);
-            }}
-          />
-          <span
-            key={item.id}
-            className={item.completed ? "completed task-text" : "task-text"}
-          >
-            {item.task}
-          </span>
-          <button
-            onClick={() => {
-              handleDelete(item.id);
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      </>
+      <li key={item.id} className="task-container">
+        <input
+          type="checkbox"
+          defaultChecked={item.completed}
+          onChange={(e) => {
+            handleComplete(item);
+          }}
+        />
+        <span className={item.completed ? "completed task-text" : "task-text"}>
+          {item.task}
+        </span>
+        <button
+          onClick={() => {
+            handleDelete(item);
+          }}
+        >
+          Delete
+        </button>
+      </li>
     );
   });
 
@@ -94,6 +91,7 @@ function List() {
         </button>
       </form>
       <div className="all-tasks-container">{mappedItems}</div>
+      <button onClick={() => console.log(list)}>View list in console</button>
     </>
   );
 }

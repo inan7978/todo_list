@@ -8,7 +8,6 @@ function App() {
       <header className="App-header">
         <h1> ToDo:</h1>
       </header>
-
       <List />
     </div>
   );
