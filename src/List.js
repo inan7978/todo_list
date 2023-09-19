@@ -55,8 +55,7 @@ function List() {
   const mappedItems = list.map((item) => {
     return (
       <>
-        <li key={item.id} className={item.completed ? "completed" : ""}>
-          {item.task}
+        <div className="task-container">
           <input
             type="checkbox"
             defaultChecked={item.completed}
@@ -64,6 +63,12 @@ function List() {
               handleComplete(item);
             }}
           />
+          <span
+            key={item.id}
+            className={item.completed ? "completed task-text" : "task-text"}
+          >
+            {item.task}
+          </span>
           <button
             onClick={() => {
               handleDelete(item.id);
@@ -71,18 +76,24 @@ function List() {
           >
             Delete
           </button>
-        </li>
+        </div>
       </>
     );
   });
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input value={newTask} onChange={(e) => setNewTask(e.target.value)} />
-        <button type="submit">Add +</button>
+      <form onSubmit={handleSubmit} className="new-task-field">
+        <input
+          className={"new-task-text"}
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button className={"new-task-button"} type="submit">
+          Add +
+        </button>
       </form>
-      <div className="tasks-block">{mappedItems}</div>
+      <div className="all-tasks-container">{mappedItems}</div>
     </>
   );
 }
