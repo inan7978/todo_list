@@ -22,7 +22,11 @@ function List({ getRemaining }) {
   });
 
   function getKey() {
-    return list[list.length - 1].id + 1;
+    if (list === null) {
+      return 0;
+    } else {
+      return list[list.length - 1].id + 1;
+    }
   }
 
   function handleSubmit(e) {
@@ -31,7 +35,7 @@ function List({ getRemaining }) {
       setList([
         ...list,
         {
-          id: getKey(),
+          id: getKey,
           task: newTask,
           completed: false,
         },
@@ -41,14 +45,10 @@ function List({ getRemaining }) {
   }
 
   function handleDelete(val) {
-    if (list.length <= 1) {
-      setList([{ id: 0, task: "Add a task...", completed: false }]);
-    } else {
-      const result = list.filter((item) => {
-        return item.id !== val.id;
-      });
-      setList([...result]);
-    }
+    const result = list.filter((item) => {
+      return item.id !== val.id;
+    });
+    setList([...result]);
   }
   function handleComplete(val) {
     setDoneList([...doneList], val);
@@ -109,7 +109,11 @@ function List({ getRemaining }) {
           +
         </button>
       </form>
-      <div className="all-tasks-container">{mappedItems}</div>
+      <div className="all-tasks-container">
+        {list.length > 0
+          ? mappedItems
+          : "Im sure you can find something to do 😉"}
+      </div>
       {/* <button onClick={() => console.log(list)}>View list in console</button> */}
     </>
   );
