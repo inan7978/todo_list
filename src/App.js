@@ -12,7 +12,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1> ToDo: {remaining} Items Remaining</h1>
+        {remaining > 0 ? (
+          <h1>
+            {" "}
+            ToDo: {remaining}{" "}
+            {(remaining > 1 && "Items remain") ||
+              (remaining === 1 && "Item left!") ||
+              (remaining < 1 && "left. Nice work!")}
+          </h1>
+        ) : (
+          <h1>All done!</h1>
+        )}
       </header>
       <List getRemaining={getRemaining} />
     </div>

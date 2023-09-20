@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./List.css";
 
 function List({ getRemaining }) {
   const [list, setList] = useState([
-    { id: 0, task: "Do HW", completed: false },
-    { id: 1, task: "go to gym", completed: true },
-    { id: 2, task: "put gas in the car", completed: false },
+    { id: 0, task: "Do homework", completed: false },
+    { id: 1, task: "Go to the gym", completed: true },
+    { id: 2, task: "Put gas in the car", completed: false },
   ]);
-
-  getRemaining(list.length);
-
+  const [doneList, setDoneList] = useState([]);
   const [newTask, setNewTask] = useState("");
+
+  var counter = 0;
+  list.filter((item) => {
+    return item.completed === false && counter++;
+  });
+
+  console.log(counter);
+
+  useEffect(() => {
+    getRemaining(counter);
+  });
 
   function getKey() {
     return list[list.length - 1].id + 1;
@@ -42,6 +51,7 @@ function List({ getRemaining }) {
     }
   }
   function handleComplete(val) {
+    setDoneList([...doneList], val);
     const temp = list;
     const location = temp.findIndex((x) => x.id === val.id);
     temp[location] = {
@@ -52,29 +62,35 @@ function List({ getRemaining }) {
     setList([...temp]); // cannot just be temp as react wont see it as a new array, even if a value in it has changed
     // use the spread operator as it creates a new array, even though the value are the same as the "old" one
   }
-
-  // useEffect(() => {}, [list]);
-
   const mappedItems = list.map((item) => {
     return (
-      <li key={item.id} className="task-container">
-        <input
-          type="checkbox"
-          defaultChecked={item.completed}
-          onChange={(e) => {
-            handleComplete(item);
-          }}
-        />
-        <span className={item.completed ? "completed task-text" : "task-text"}>
-          {item.task}
-        </span>
+      <li
+        key={item.id}
+        className={
+          item.completed ? "task-container-completed" : "task-container"
+        }
+      >
+        <div className="checkbox-container">
+          <input
+            className="checkbox"
+            type="checkbox"
+            defaultChecked={item.completed}
+            onChange={(e) => {
+              handleComplete(item);
+            }}
+          />
+        </div>
+        <div className="text-container">
+          <span className="task-text">{item.task}</span>
+        </div>
         <div className="del-btn-container">
           <button
+            className="del-btn"
             onClick={() => {
               handleDelete(item);
             }}
           >
-            Delete
+            X
           </button>
         </div>
       </li>
