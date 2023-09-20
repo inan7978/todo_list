@@ -22,7 +22,7 @@ function List({ getRemaining }) {
   });
 
   function getKey() {
-    if (list === null) {
+    if (list.length === 0) {
       return 0;
     } else {
       return list[list.length - 1].id + 1;
@@ -35,7 +35,7 @@ function List({ getRemaining }) {
       setList([
         ...list,
         {
-          id: getKey,
+          id: getKey(),
           task: newTask,
           completed: false,
         },
